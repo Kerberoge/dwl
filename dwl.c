@@ -340,7 +340,7 @@ static void requestdecorationmode(struct wl_listener *listener, void *data);
 static void requeststartdrag(struct wl_listener *listener, void *data);
 static void requestmonstate(struct wl_listener *listener, void *data);
 static void resize(Client *c, struct wlr_box geo, int interact);
-static void run(char *startup_cmd);
+static void run(void);
 static void setcursor(struct wl_listener *listener, void *data);
 static void setcursorshape(struct wl_listener *listener, void *data);
 static void setfloating(Client *c, int floating);
@@ -378,7 +378,6 @@ static void zoom(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
-static pid_t child_pid = -1;
 static int locked;
 static void *exclusive_focus;
 static struct wl_display *dpy;
@@ -814,10 +813,6 @@ cleanup(void)
 		}
 	}
 
-	if (child_pid > 0) {
-		kill(child_pid, SIGTERM);
-		waitpid(child_pid, NULL, 0);
-	}
 	wlr_xcursor_manager_destroy(cursor_mgr);
 	wlr_output_layout_destroy(output_layout);
 
@@ -1727,8 +1722,6 @@ handlesig(int signo)
 			   ) {
 			pid_t *p, *lim;
 			waitpid(in.si_pid, NULL, 0);
-			if (in.si_pid == child_pid)
-				child_pid = -1;
 			if (!(p = autostart_pids))
 				continue;
 			lim = &p[autostart_len];
@@ -2399,7 +2392,7 @@ resize(Client *c, struct wlr_box geo, int interact)
 }
 
 void
-run(char *startup_cmd)
+run(void)
 {
 	/* Add a Unix socket to the Wayland display. */
 	const char *socket = wl_display_add_socket_auto(dpy);
@@ -2414,23 +2407,6 @@ run(char *startup_cmd)
 
 	/* Now that the socket exists and the backend is started, run the startup command */
 	autostartexec();
-	if (startup_cmd) {
-		int piperw[2];
-		if (pipe(piperw) < 0)
-			die("startup: pipe:");
-		if ((child_pid = fork()) < 0)
-			die("startup: fork:");
-		if (child_pid == 0) {
-			dup2(piperw[0], STDIN_FILENO);
-			close(piperw[0]);
-			close(piperw[1]);
-			execl("/bin/sh", "/bin/sh", "-c", startup_cmd, NULL);
-			die("startup: execl:");
-		}
-		dup2(piperw[1], STDOUT_FILENO);
-		close(piperw[1]);
-		close(piperw[0]);
-	}
 	printstatus();
 
 	/* At this point the outputs are initialized, choose initial selmon based on
@@ -3419,13 +3395,10 @@ xwaylandready(struct wl_listener *listener, void *data)
 int
 main(int argc, char *argv[])
 {
-	char *startup_cmd = NULL;
 	int c;
 
-	while ((c = getopt(argc, argv, "s:hdv")) != -1) {
-		if (c == 's')
-			startup_cmd = optarg;
-		else if (c == 'd')
+	while ((c = getopt(argc, argv, "hdv")) != -1) {
+		if (c == 'd')
 			log_level = WLR_DEBUG;
 		else if (c == 'v')
 			die("dwl " VERSION);
@@ -3439,10 +3412,10 @@ main(int argc, char *argv[])
 	if (!getenv("XDG_RUNTIME_DIR"))
 		die("XDG_RUNTIME_DIR must be set");
 	setup();
-	run(startup_cmd);
+	run();
 	cleanup();
 	return EXIT_SUCCESS;
 
 usage:
-	die("Usage: %s [-v] [-d] [-s startup command]", argv[0]);
+	die("Usage: %s [-v] [-d]", argv[0]);
 }
