@@ -1986,7 +1986,7 @@ mapnotify(struct wl_listener *listener, void *data)
 	} else {
 		applyrules(c);
 	}
-	if (c->isfloating) {
+	if (c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
 		c->geom.x = (c->mon->w.width - c->geom.width) / 2 + c->mon->m.x;
 		c->geom.y = (c->mon->w.height - c->geom.height) / 2 + c->mon->m.y;
 	}
