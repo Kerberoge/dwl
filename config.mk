@@ -5,8 +5,6 @@ PKG_CONFIG = pkg-config
 
 # paths
 PREFIX = /usr/local
-MANDIR = $(PREFIX)/share/man
-DATADIR = $(PREFIX)/share
 
 # Uncomment to build XWayland support
 XWAYLAND = -DXWAYLAND
