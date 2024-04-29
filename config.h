@@ -12,7 +12,7 @@ static const float focuscolor[]            = COLOR(0x6d86a1ff);
 static const float urgentcolor[]           = COLOR(0xff5050ff);
 static const float fullscreen_bg[]         = COLOR(0x1a1a1aff);
 
-#define TAGCOUNT (4)
+#define TAGCOUNT 4
 
 static const char *const autostart[] = {
 	"bash", "-c", "swaybg -m fill -i ~/wallpapers/spy_family_street.png", NULL,
@@ -42,7 +42,7 @@ static const Layout layouts[] = {
 
 static const MonitorRule monrules[] = {
 	/* name       mfact  nmaster scale layout       rotate/reflect                x    y */
-	{ NULL,       0.55f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+	{ NULL,       0.5f,  1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 };
 
 static const struct xkb_rule_names xkb_rules = {
@@ -133,7 +133,7 @@ static const Key keys[] = {
 	TAGKEYS(                     XKB_KEY_period,       XKB_KEY_greater,  2),
 	TAGKEYS(                     XKB_KEY_slash,        XKB_KEY_question, 3),
 	{ SUPER|SHIFT,               XKB_KEY_Q,            quit,             {0} },
-	{ CTRL|ALT,                  XKB_KEY_Terminate_Server,    quit,    {0} },
+	{ CTRL|ALT,      XKB_KEY_Terminate_Server,         quit,             {0} },
 
 #define CHVT(n) { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_XF86Switch_VT_##n, chvt, {.ui = (n)} }
 	CHVT(1), CHVT(2), CHVT(3), CHVT(4),
