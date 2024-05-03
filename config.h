@@ -28,7 +28,6 @@ static int log_level = WLR_ERROR;
 
 static const Rule rules[] = {
 	/* app_id              title       tags mask     isfloating   monitor */
-	{ "xfce4-appfinder",   NULL,       0,            1,           0 },
 	{ "floating",          NULL,       0,            1,           0 },
 	{ "galculator",        NULL,       0,            1,           0 },
 };
@@ -87,7 +86,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 static const Key keys[] = {
 	/* modifier                  key                   function          argument */
-	{ ALT,                       XKB_KEY_space,        spawn,            SHCMD("xfce4-appfinder") },
+	{ ALT,                       XKB_KEY_space,        spawn,            SHCMD("wofi") },
 	{ SUPER,                     XKB_KEY_Return,       spawn,            SHCMD("foot") },
 	{ SUPER|SHIFT,               XKB_KEY_Return,       spawn,            SHCMD("foot -a floating") },
 	{ SUPER,                     XKB_KEY_e,            spawn,            SHCMD("thunar") },
