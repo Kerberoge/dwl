@@ -146,5 +146,5 @@ static const Button buttons[] = {
 };
 
 static const Gesture gestures[] = {
-	{ 0,             SWIPE_DOWN,           3,          focusstack,   {.i = -1} },
+	{ 0,             SWIPE_DOWN,           3,          togglekeyboard,   {0} },
 };

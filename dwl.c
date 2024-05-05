@@ -165,6 +165,16 @@ typedef struct {
 	const Arg arg;
 } Key;
 
+struct keyboard_group_device {
+    struct wlr_keyboard *keyboard;
+    struct wl_listener key;
+    struct wl_listener modifiers;
+    struct wl_listener keymap;
+    struct wl_listener repeat_info;
+    struct wl_listener destroy;
+    struct wl_list link;
+};
+
 typedef struct {
 	struct wl_list link;
 	struct wlr_keyboard_group *wlr_group;
@@ -370,6 +380,7 @@ static void tile(Monitor *m);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglefullscreen(const Arg *arg);
+static void togglekeyboard(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unlocksession(struct wl_listener *listener, void *data);
@@ -3017,6 +3028,20 @@ togglefullscreen(const Arg *arg)
 	Client *sel = focustop(selmon);
 	if (sel)
 		setfullscreen(sel, !sel->isfullscreen);
+}
+
+void
+togglekeyboard(const Arg *arg)
+{
+	struct keyboard_group_device *group_dev;
+	struct libinput_device *libinput_dev;
+	uint32_t mode;
+
+	wl_list_for_each(group_dev, &kb_group.wlr_group->devices, link) {
+		libinput_dev = wlr_libinput_get_device_handle(&group_dev->keyboard->base);
+		mode = libinput_device_config_send_events_get_mode(libinput_dev);
+		libinput_device_config_send_events_set_mode(libinput_dev, !mode);
+	}
 }
 
 void
