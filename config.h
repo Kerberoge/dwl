@@ -63,6 +63,7 @@ static const int disable_while_typing = 0;
 static const int left_handed = 0;
 static const int middle_button_emulation = 1;
 static const double touchpad_scroll_factor = 0.2;
+static const unsigned int swipe_min_threshold = 0;
 
 static const enum libinput_config_scroll_method scroll_method = LIBINPUT_CONFIG_SCROLL_2FG;
 static const enum libinput_config_click_method click_method = LIBINPUT_CONFIG_CLICK_METHOD_BUTTON_AREAS;
@@ -86,11 +87,11 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 static const Key keys[] = {
 	/* modifier                  key                   function          argument */
-	{ ALT,                       XKB_KEY_space,        spawn,            SHCMD("wofi") },
-	{ SUPER,                     XKB_KEY_Return,       spawn,            SHCMD("foot") },
-	{ SUPER|SHIFT,               XKB_KEY_Return,       spawn,            SHCMD("foot -a floating") },
-	{ SUPER,                     XKB_KEY_e,            spawn,            SHCMD("thunar") },
-	{ SUPER,                     XKB_KEY_w,            spawn,            SHCMD("firefox") },
+	{ ALT,           XKB_KEY_space,                    spawn,            SHCMD("wofi") },
+	{ SUPER,         XKB_KEY_Return,                   spawn,            SHCMD("foot") },
+	{ SUPER|SHIFT,   XKB_KEY_Return,                   spawn,            SHCMD("foot -a floating") },
+	{ SUPER,         XKB_KEY_e,                        spawn,            SHCMD("thunar") },
+	{ SUPER,         XKB_KEY_w,                        spawn,            SHCMD("firefox") },
 	{ 0,             XKB_KEY_XF86TouchpadToggle,       spawn,            SHCMD("foot -a floating bluetoothctl") },
 	{ 0,             XKB_KEY_XF86WebCam,               spawn,            SHCMD("foot -a floating iwctl") },
 	{ 0,             XKB_KEY_XF86Launch1,              spawn,            SHCMD("toggle-theme") },
@@ -139,7 +140,11 @@ static const Key keys[] = {
 };
 
 static const Button buttons[] = {
-	{ SUPER,                     BTN_LEFT,           moveresize,       {.ui = CurMove} },
-	{ SUPER,                     BTN_MIDDLE,         togglefloating,   {0} },
-	{ SUPER,                     BTN_RIGHT,          moveresize,       {.ui = CurResize} },
+	{ SUPER,         BTN_LEFT,                         moveresize,       {.ui = CurMove} },
+	{ SUPER,         BTN_MIDDLE,                       togglefloating,   {0} },
+	{ SUPER,         BTN_RIGHT,                        moveresize,       {.ui = CurResize} },
+};
+
+static const Gesture gestures[] = {
+	{ 0,             SWIPE_DOWN,           3,          focusstack,   {.i = -1} },
 };
