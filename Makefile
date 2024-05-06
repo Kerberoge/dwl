@@ -49,11 +49,7 @@ clean:
 	rm -f dwl *.o *-protocol.h *-protocol.c
 
 install: dwl
-	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f dwl $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/dwl
-uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/dwl
+	install -s -D -t $(PREFIX)/bin dwl
 
 .SUFFIXES: .c .o
 .c.o:
