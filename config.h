@@ -20,7 +20,8 @@ static const char *const autostart[] = {
 	"bash", "-c", "pipewire-pulse", NULL,
 	"bash", "-c", "wireplumber", NULL,
 	"bash", "-c", "dwlb", NULL,
-	"bash", "-c", "status-script", NULL,
+	"bash", "-c", "trap 'trap - SIGTERM; pkill -g $$; exit' SIGTERM; " \
+					"status-line | dwlb -status-stdin all & wait $!", NULL,
     NULL
 };
 
@@ -97,8 +98,8 @@ static const Key keys[] = {
 	{ 0,             XKB_KEY_XF86Calculator,           spawn,            SHCMD("galculator") },
 	{ 0,             XKB_KEY_XF86Launch1,              spawn,            SHCMD("toggle-theme") },
 	{ SUPER,         XKB_KEY_p,                        spawn,            SHCMD("toggle-display") },
-	{ 0,             XKB_KEY_XF86MonBrightnessUp,      spawn,            SHCMD("brightnessctl set +10%") },
-	{ 0,             XKB_KEY_XF86MonBrightnessDown,    spawn,            SHCMD("brightnessctl set 10%-") },
+	{ 0,             XKB_KEY_XF86MonBrightnessUp,      spawn,            SHCMD("brightnessctl set +5%") },
+	{ 0,             XKB_KEY_XF86MonBrightnessDown,    spawn,            SHCMD("brightnessctl set 5%-") },
 	{ 0,             XKB_KEY_XF86AudioMute,            spawn,            SHCMD("volume mute") },
 	{ 0,             XKB_KEY_XF86AudioRaiseVolume,     spawn,            SHCMD("volume up") },
 	{ 0,             XKB_KEY_XF86AudioLowerVolume,     spawn,            SHCMD("volume down") },
