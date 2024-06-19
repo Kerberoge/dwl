@@ -15,13 +15,14 @@ static const float fullscreen_bg[]         = COLOR(0x1a1a1aff);
 #define TAGCOUNT 4
 
 static const char *const autostart[] = {
-	"bash", "-c", "swaybg -m fill -i ~/wallpapers/spy_family_street.png", NULL,
+	"bash", "-c", "swaybg -m fill -i ~/wallpapers/blue_cliff.jpg", NULL,
 	"bash", "-c", "pipewire", NULL,
 	"bash", "-c", "pipewire-pulse", NULL,
 	"bash", "-c", "wireplumber", NULL,
 	"bash", "-c", "dwlb", NULL,
 	"bash", "-c", "trap 'trap - SIGTERM; pkill -g $$; exit' SIGTERM; " \
 					"status-line | dwlb -status-stdin all & wait $!", NULL,
+	"bash", "-c", "check-lid-status", NULL,
     NULL
 };
 
@@ -54,7 +55,7 @@ static const int repeat_rate = 30;
 static const int repeat_delay = 200;
 
 static const char *cursor_theme = "Bibata-Modern-Classic";
-static const char *cursor_size = "20";
+static const char *cursor_size = "16";
 
 static const int tap_to_click = 1;
 static const int tap_and_drag = 1;
