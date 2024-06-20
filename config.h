@@ -30,8 +30,8 @@ static int log_level = WLR_ERROR;
 
 static const Rule rules[] = {
 	/* app_id              title       tags mask     isfloating   monitor */
-	{ "floating",          NULL,       0,            1,           0 },
-	{ "galculator",        NULL,       0,            1,           0 },
+	{ "floating",          NULL,       0,            1,           -1 },
+	{ "galculator",        NULL,       0,            1,           -1 },
 };
 
 static const Layout layouts[] = {
@@ -94,23 +94,22 @@ static const Key keys[] = {
 	{ SUPER|SHIFT,   XKB_KEY_Return,                   spawn,            SHCMD("foot -a floating") },
 	{ SUPER,         XKB_KEY_e,                        spawn,            SHCMD("foot nnn") },
 	{ SUPER,         XKB_KEY_w,                        spawn,            SHCMD("firefox") },
-	{ 0,             XKB_KEY_XF86TouchpadToggle,       spawn,            SHCMD("foot -a floating bluetoothctl") },
-	{ 0,             XKB_KEY_XF86WebCam,               spawn,            SHCMD("foot -a floating iwctl") },
-	{ 0,             XKB_KEY_XF86Calculator,           spawn,            SHCMD("galculator") },
-	{ 0,             XKB_KEY_XF86Launch1,              spawn,            SHCMD("toggle-theme") },
+	{ 0,             XKB_KEY_XF86Search,               spawn,            SHCMD("foot -a floating bluetoothctl") },
+	{ 0,             XKB_KEY_XF86RFKill,               spawn,            SHCMD("foot -a floating iwctl") },
+	{ 0,             XKB_KEY_XF86Sleep,                spawn,            SHCMD("toggle-sleep-inhibition") },
+	{ SUPER,         XKB_KEY_t,                        spawn,            SHCMD("toggle-theme") },
 	{ SUPER,         XKB_KEY_p,                        spawn,            SHCMD("toggle-display") },
 	{ 0,             XKB_KEY_XF86MonBrightnessUp,      spawn,            SHCMD("brightnessctl set +5%") },
 	{ 0,             XKB_KEY_XF86MonBrightnessDown,    spawn,            SHCMD("brightnessctl set 5%-") },
 	{ 0,             XKB_KEY_XF86AudioMute,            spawn,            SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
+	{ 0,             XKB_KEY_XF86AudioMicMute,         spawn,            SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	{ 0,             XKB_KEY_XF86AudioRaiseVolume,     spawn,            SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%") },
 	{ 0,             XKB_KEY_XF86AudioLowerVolume,     spawn,            SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%") },
 	{ CTRL,          XKB_KEY_space,                    spawn,            SHCMD("playerctl play-pause") },
 	{ 0,             XKB_KEY_Print,                    spawn,            SHCMD("grim >(wl-copy)") },
-	{ SUPER|SHIFT,   XKB_KEY_S,                        spawn,            SHCMD("grim -g \"$(slurp)\" >(wl-copy)") },
+	{ SHIFT,         XKB_KEY_Print,                    spawn,            SHCMD("grim -g \"$(slurp)\" >(wl-copy)") },
 	{ 0,             XKB_KEY_XF86PowerOff,             spawn,            SHCMD("doas zzz") },
 	{ SUPER,         XKB_KEY_h,                        spawn,            SHCMD("doas ZZZ") },
-	{ SUPER,         XKB_KEY_r,                        spawn,            SHCMD("doas reboot") },
-	{ SUPER,         XKB_KEY_s,                        spawn,            SHCMD("doas poweroff") },
 	{ SUPER,         XKB_KEY_b,                        togglebar,        {0} },
 	{ SUPER,         XKB_KEY_l,                        focusstack,       {.i = +1} },
 	{ SUPER,         XKB_KEY_k,                        focusstack,       {.i = -1} },
