@@ -29,8 +29,8 @@ static int log_level = WLR_ERROR;
 
 static const Rule rules[] = {
 	/* app_id              title       tags mask     isfloating   monitor */
-	{ "floating",          NULL,       0,            1,           0 },
-	{ "galculator",        NULL,       0,            1,           0 },
+	{ "floating",          NULL,       0,            1,           -1 },
+	{ "galculator",        NULL,       0,            1,           -1 },
 };
 
 static const Layout layouts[] = {
@@ -106,10 +106,9 @@ static const Key keys[] = {
 	{ CTRL,          XKB_KEY_space,                    spawn,            SHCMD("playerctl play-pause") },
 	{ 0,             XKB_KEY_Print,                    spawn,            SHCMD("grim >(wl-copy)") },
 	{ SUPER|SHIFT,   XKB_KEY_S,                        spawn,            SHCMD("grim -g \"$(slurp)\" >(wl-copy)") },
+	{ SUPER,         XKB_KEY_s,                        spawn,            SHCMD("toggle-sleep-inhibition") },
 	{ 0,             XKB_KEY_XF86PowerOff,             spawn,            SHCMD("doas zzz") },
 	{ SUPER,         XKB_KEY_h,                        spawn,            SHCMD("doas ZZZ") },
-	{ SUPER,         XKB_KEY_r,                        spawn,            SHCMD("doas reboot") },
-	{ SUPER,         XKB_KEY_s,                        spawn,            SHCMD("doas poweroff") },
 	{ SUPER,         XKB_KEY_b,                        togglebar,        {0} },
 	{ SUPER,         XKB_KEY_l,                        focusstack,       {.i = +1} },
 	{ SUPER,         XKB_KEY_k,                        focusstack,       {.i = -1} },
