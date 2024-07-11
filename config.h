@@ -15,11 +15,13 @@ static const float fullscreen_bg[]         = COLOR(0x1a1a1aff);
 #define TAGCOUNT 4
 
 static const char *const autostart[] = {
-	"bash", "-c", "swaybg -m fill -i ~/wallpapers/spy_family_street.png", NULL,
-	"bash", "-c", "pipewire", NULL,
-	"bash", "-c", "pipewire-pulse", NULL,
-	"bash", "-c", "wireplumber", NULL,
-	"bash", "-c", "dwlb", NULL,
+	"pipewire", NULL,
+	"pipewire-pulse", NULL,
+	"wireplumber", NULL,
+	"/usr/local/libexec/xdg-desktop-portal-termfilechooser", NULL,
+	"/usr/libexec/xdg-desktop-portal", NULL,
+	"swaybg", "-mfill", "-i/home/joe/wallpapers/spy_family_street.png", NULL,
+	"dwlb", NULL,
 	"bash", "-c", "trap 'trap - SIGTERM; pkill -g $$; exit' SIGTERM; " \
 					"status-line | dwlb -status-stdin all & wait $!", NULL,
     NULL
@@ -88,7 +90,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 static const Key keys[] = {
 	/* modifier                  key                   function          argument */
-	{ ALT,           XKB_KEY_space,                    spawn,            SHCMD("bemenu-desktop") },
+	{ ALT,           XKB_KEY_space,                    spawn,            SHCMD("menu-desktop") },
 	{ SUPER,         XKB_KEY_Return,                   spawn,            SHCMD("foot") },
 	{ SUPER|SHIFT,   XKB_KEY_Return,                   spawn,            SHCMD("foot -a floating") },
 	{ SUPER,         XKB_KEY_e,                        spawn,            SHCMD("foot nnn") },
