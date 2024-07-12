@@ -3525,8 +3525,6 @@ main(int argc, char *argv[])
 	while ((c = getopt(argc, argv, "hdv")) != -1) {
 		if (c == 'd')
 			log_level = WLR_DEBUG;
-		else if (c == 'v')
-			die("dwl " VERSION);
 		else
 			goto usage;
 	}
@@ -3542,5 +3540,5 @@ main(int argc, char *argv[])
 	return EXIT_SUCCESS;
 
 usage:
-	die("Usage: %s [-v] [-d]", argv[0]);
+	die("Usage: %s [-d]", argv[0]);
 }
