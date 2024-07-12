@@ -22,8 +22,7 @@ static const char *const autostart[] = {
 	"/usr/libexec/xdg-desktop-portal", NULL,
 	"swaybg", "-mfill", "-i/home/joe/wallpapers/spy_family_street.png", NULL,
 	"dwlb", NULL,
-	"bash", "-c", "trap 'trap - SIGTERM; pkill -g $$; exit' SIGTERM; " \
-					"status-line | dwlb -status-stdin all & wait $!", NULL,
+	"status-line", NULL,
     NULL
 };
 
