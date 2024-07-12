@@ -89,7 +89,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 
 static const Key keys[] = {
 	/* modifier                  key                   function          argument */
-	{ ALT,           XKB_KEY_space,                    spawn,            SHCMD("bemenu-desktop") },
+	{ ALT,           XKB_KEY_space,                    spawn,            SHCMD("menu-desktop") },
 	{ SUPER,         XKB_KEY_Return,                   spawn,            SHCMD("foot") },
 	{ SUPER|SHIFT,   XKB_KEY_Return,                   spawn,            SHCMD("foot -a floating") },
 	{ SUPER,         XKB_KEY_e,                        spawn,            SHCMD("foot nnn") },
