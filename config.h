@@ -15,14 +15,13 @@ static const float fullscreen_bg[]         = COLOR(0x1a1a1aff);
 #define TAGCOUNT 4
 
 static const char *const autostart[] = {
-	"bash", "-c", "swaybg -m fill -i ~/wallpapers/blue_cliff.jpg", NULL,
-	"bash", "-c", "pipewire", NULL,
-	"bash", "-c", "pipewire-pulse", NULL,
-	"bash", "-c", "wireplumber", NULL,
-	"bash", "-c", "dwlb", NULL,
-	"bash", "-c", "trap 'trap - SIGTERM; pkill -g $$; exit' SIGTERM; " \
-					"status-line | dwlb -status-stdin all & wait $!", NULL,
-	"bash", "-c", "check-lid-status", NULL,
+	"pipewire", NULL,
+	"pipewire-pulse", NULL,
+	"wireplumber", NULL,
+	"swaybg",  "-mfill", "-i/home/joe/wallpapers/blue_cliff.jpg", NULL,
+	"dwlb", NULL,
+	"status-line", NULL,
+	"check-lid-status", NULL,
     NULL
 };
 
@@ -47,7 +46,7 @@ static const MonitorRule monrules[] = {
 };
 
 static const struct xkb_rule_names xkb_rules = {
-	.layout = "us,us(intl)",
+	.layout = "us,us(intl),ro(std)",
 	.options = "grp:shifts_toggle",
 };
 
