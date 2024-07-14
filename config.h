@@ -18,8 +18,6 @@ static const char *const autostart[] = {
 	"pipewire", NULL,
 	"pipewire-pulse", NULL,
 	"wireplumber", NULL,
-	"/usr/local/libexec/xdg-desktop-portal-termfilechooser", NULL,
-	"/usr/libexec/xdg-desktop-portal", NULL,
 	"swaybg", "-mfill", "-i/home/joe/wallpapers/spy_family_street.png", NULL,
 	"dwlb", NULL,
 	"status-line", NULL,
