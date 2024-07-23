@@ -7,8 +7,8 @@ static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
 static const float rootcolor[]             = COLOR(0x222222ff);
-static const float bordercolor[]           = COLOR(0x2a2f3aff);
-static const float focuscolor[]            = COLOR(0x6d86a1ff);
+static const float bordercolor[]           = COLOR(0x2c2e2eff);
+static const float focuscolor[]            = COLOR(0x576357ff);
 static const float urgentcolor[]           = COLOR(0xff5050ff);
 static const float fullscreen_bg[]         = COLOR(0x1a1a1aff);
 
@@ -18,7 +18,7 @@ static const char *const autostart[] = {
 	"pipewire", NULL,
 	"pipewire-pulse", NULL,
 	"wireplumber", NULL,
-	"swaybg", "-mfill", "-i/home/joe/wallpapers/spy_family_street.png", NULL,
+	"swaybg", "-mfill", "-i/home/joe/wallpapers/void.png", NULL,
 	"dwlb", NULL,
 	"status-line", NULL,
     NULL
@@ -52,8 +52,8 @@ static const struct xkb_rule_names xkb_rules = {
 static const int repeat_rate = 30;
 static const int repeat_delay = 200;
 
-static const char *cursor_theme = "Bibata-Modern-Classic";
-static const char *cursor_size = "20";
+static const char *cursor_theme = "Adwaita-Classic";
+static const char *cursor_size = "16";
 
 static const int tap_to_click = 1;
 static const int tap_and_drag = 1;
@@ -99,9 +99,9 @@ static const Key keys[] = {
 	{ SUPER,         XKB_KEY_p,                        spawn,            SHCMD("toggle-display") },
 	{ 0,             XKB_KEY_XF86MonBrightnessUp,      spawn,            SHCMD("brightnessctl set +5%") },
 	{ 0,             XKB_KEY_XF86MonBrightnessDown,    spawn,            SHCMD("brightnessctl set 5%-") },
-	{ 0,             XKB_KEY_XF86AudioMute,            spawn,            SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
-	{ 0,             XKB_KEY_XF86AudioRaiseVolume,     spawn,            SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%") },
-	{ 0,             XKB_KEY_XF86AudioLowerVolume,     spawn,            SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%") },
+	{ 0,             XKB_KEY_XF86AudioMute,            spawn,            SHCMD("wpctl set-mute @DEFAULT_SINK@ toggle") },
+	{ 0,             XKB_KEY_XF86AudioRaiseVolume,     spawn,            SHCMD("wpctl set-volume @DEFAULT_SINK@ 5%+") },
+	{ 0,             XKB_KEY_XF86AudioLowerVolume,     spawn,            SHCMD("wpctl set-volume @DEFAULT_SINK@ 5%-") },
 	{ CTRL,          XKB_KEY_space,                    spawn,            SHCMD("playerctl play-pause") },
 	{ 0,             XKB_KEY_Print,                    spawn,            SHCMD("grim >(wl-copy)") },
 	{ SUPER|SHIFT,   XKB_KEY_S,                        spawn,            SHCMD("grim -g \"$(slurp)\" >(wl-copy)") },
