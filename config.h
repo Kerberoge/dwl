@@ -19,8 +19,6 @@ static const char *const autostart[] = {
 	"pipewire-pulse", NULL,
 	"wireplumber", NULL,
 	"swaybg", "-mfill", "-i/home/joe/wallpapers/void.png", NULL,
-	"dwlb", NULL,
-	"status-line", NULL,
     NULL
 };
 
@@ -108,7 +106,6 @@ static const Key keys[] = {
 	{ SUPER,         XKB_KEY_s,                        spawn,            SHCMD("toggle-sleep-inhibition") },
 	{ 0,             XKB_KEY_XF86PowerOff,             spawn,            SHCMD("doas zzz") },
 	{ SUPER,         XKB_KEY_h,                        spawn,            SHCMD("doas ZZZ") },
-	{ SUPER,         XKB_KEY_b,                        togglebar,        {0} },
 	{ SUPER,         XKB_KEY_l,                        focusstack,       {.i = +1} },
 	{ SUPER,         XKB_KEY_k,                        focusstack,       {.i = -1} },
 	{ SUPER,         XKB_KEY_i,                        incnmaster,       {.i = +1} },
