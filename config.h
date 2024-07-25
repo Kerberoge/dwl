@@ -6,13 +6,24 @@
 static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
-static const float rootcolor[]             = COLOR(0x222222ff);
-static const float bordercolor[]           = COLOR(0x2c2e2eff);
-static const float focuscolor[]            = COLOR(0x576357ff);
-static const float urgentcolor[]           = COLOR(0xff5050ff);
+//static const float rootcolor[]             = COLOR(0x222222ff);
+//static const float bordercolor[]           = COLOR(0x2c2e2eff);
+//static const float focuscolor[]            = COLOR(0x576357ff);
+//static const float urgentcolor[]           = COLOR(0xff5050ff);
+static const int showbar                   = 1; /* 0 means no bar */
+static const int topbar                    = 1; /* 0 means bottom bar */
+static const char *fonts[]                 = {"DejaVu Sans Mono:size=10.5"};
+static const float rootcolor[]             = COLOR(0x000000ff);
 static const float fullscreen_bg[]         = COLOR(0x1a1a1aff);
 
-#define TAGCOUNT 4
+static uint32_t colors[][3] = {
+	/*               fg          bg          border    */
+	[SchemeNorm] = { 0xddddddff, 0x1c1e1eff, 0x2c2e2eff },
+	[SchemeSel]  = { 0xddddddff, 0x206141ff, 0x576357ff },
+	[SchemeUrg]  = { 0xffffffff, 0xff5050ff, 0xff5050ff },
+};
+
+static char *tags[] = { "1", "2", "3", "4" };
 
 static const char *const autostart[] = {
 	"pipewire", NULL,
@@ -106,6 +117,7 @@ static const Key keys[] = {
 	{ SUPER,         XKB_KEY_s,                        spawn,            SHCMD("toggle-sleep-inhibition") },
 	{ 0,             XKB_KEY_XF86PowerOff,             spawn,            SHCMD("doas zzz") },
 	{ SUPER,         XKB_KEY_h,                        spawn,            SHCMD("doas ZZZ") },
+	{ SUPER,         XKB_KEY_b,                        togglebar,        {0} },
 	{ SUPER,         XKB_KEY_l,                        focusstack,       {.i = +1} },
 	{ SUPER,         XKB_KEY_k,                        focusstack,       {.i = -1} },
 	{ SUPER,         XKB_KEY_i,                        incnmaster,       {.i = +1} },
@@ -138,9 +150,16 @@ static const Key keys[] = {
 };
 
 static const Button buttons[] = {
-	{ SUPER,         BTN_LEFT,                         moveresize,       {.ui = CurMove} },
-	{ SUPER,         BTN_MIDDLE,                       togglefloating,   {0} },
-	{ SUPER,         BTN_RIGHT,                        moveresize,       {.ui = CurResize} },
+//	{ SUPER,         BTN_LEFT,                         moveresize,       {.ui = CurMove} },
+//	{ SUPER,         BTN_MIDDLE,                       togglefloating,   {0} },
+//	{ SUPER,         BTN_RIGHT,                        moveresize,       {.ui = CurResize} },
+	{ ClkClient,   SUPER,  BTN_LEFT,   moveresize,     {.ui = CurMove} },
+	{ ClkClient,   SUPER,  BTN_MIDDLE, togglefloating, {0} },
+	{ ClkClient,   SUPER,  BTN_RIGHT,  moveresize,     {.ui = CurResize} },
+	{ ClkTagBar,   0,      BTN_LEFT,   view,           {0} },
+	{ ClkTagBar,   0,      BTN_RIGHT,  toggleview,     {0} },
+	{ ClkTagBar,   SUPER,  BTN_LEFT,   tag,            {0} },
+	{ ClkTagBar,   SUPER,  BTN_RIGHT,  toggletag,      {0} },
 };
 
 static const Gesture gestures[] = {
