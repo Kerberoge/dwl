@@ -10,9 +10,10 @@ static const unsigned int borderpx         = 1;  /* border pixel of windows */
 //static const float bordercolor[]           = COLOR(0x2c2e2eff);
 //static const float focuscolor[]            = COLOR(0x576357ff);
 //static const float urgentcolor[]           = COLOR(0xff5050ff);
+static const int user_bh		           = 18;
 static const int showbar                   = 1; /* 0 means no bar */
 static const int topbar                    = 1; /* 0 means bottom bar */
-static const char *fonts[]                 = {"DejaVu Sans Mono:size=10.5"};
+static const char *fonts[]                 = {"DejaVu Sans Mono:size=10"};
 static const float rootcolor[]             = COLOR(0x000000ff);
 static const float fullscreen_bg[]         = COLOR(0x1a1a1aff);
 
