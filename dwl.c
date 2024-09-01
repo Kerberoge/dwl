@@ -1674,7 +1674,7 @@ drawstatus(Monitor *m)
 			strncat(rstext, p, 1);
 		}
 	}
-	tw = TEXTW(m, rstext) - m->lrpad + 2; /* 2px right padding */
+	tw = TEXTW(m, rstext) - m->lrpad;
 
 	x = m->b.width - tw;
 	itext = stext;
